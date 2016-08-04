@@ -1,0 +1,53 @@
+.center-fix {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.main-spinner {
+    font-size: 3em;
+    color: color(primary);
+}
+
+img {
+	width: 140px;
+	height: 182px;
+	margin: 15px;
+}
+
+.navbar img {
+    width: 232px;
+    height: 29px;
+}
+
+.notification {
+    padding: 15px;
+}
+
+.user-notification {
+    padding: 5px;
+}
+
+.panel-title {
+    font-weight: bold;
+    color: #0DB14B;
+}
+
+.navbar-inverse {
+    background-color: #fff;
+    border-bottom:0px;
+    box-shadow: 0px 1px 20px #5E5E5E;
+    background-color: #fff;
+}
+
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus,
+.navbar-inverse .navbar-brand {
+    color:#333333;
+}
+
+.navbar-fixed-top {
+    border-width: 0 0 0px;
+}

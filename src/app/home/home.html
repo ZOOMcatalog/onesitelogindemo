@@ -1,0 +1,95 @@
+<p>You can found the source code in <a href="https://github.com/ZOOMcatalog/onesitelogindemo" target="_blank">Github</a></p>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+	<h3 class="panel-title">Application token</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<p *ngIf="appLoading">
+					Logging application...
+				</p>
+				<p *ngIf="!appLoading" style="word-wrap: break-word;">
+					<strong>Application token:</strong> {{tokens.access_token}}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Users</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12" *ngIf="!appLoading">
+				<div class="form-group">
+					<label for="user">Register and/or login the user:</label>
+					<div class="form-inline">
+						<input required [(ngModel)]="signup.username" type="text" [disabled]="userLoading" class="form-control" placeholder="Email address or MD5 string" size="50">
+						<button type="button" class="btn btn-primary" (click)="process()" [disabled]="userLoading">Process</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12" *ngIf="error" style="word-wrap:break-word;">
+				<p *ngIf="error" class="bg-danger user-notification">{{error}}</p>
+			</div>
+
+			<div class="col-md-12" *ngIf="appLoading">
+				Waiting for Application Token...
+			</div>
+
+			<div class="col-md-12" *ngIf="userLoading">
+				Processing, this could take a little bit...
+			</div>
+
+			<div class="col-md-12" *ngIf="tokens.user_token" style="word-wrap:break-word;">
+				<p *ngIf="tokens.user_token" class="bg-success user-notification">
+					<strong>User token:</strong> {{tokens.user_token}}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Catalogs</h3>
+	</div>
+	<div class="panel-body">
+		<p *ngIf="!tokens.user_token" class="bg-danger notification">You are not logged yet.</p>
+		<p *ngIf="tokens.user_token" class="bg-success notification">You are now logged as <strong>{{tokens.user}}</strong></p>
+		<div class="row">
+			<div class="col-md-12" *ngIf="!appLoading">
+				<ul class="list-unstyled">
+					<li *ngFor="let catalog of catalogs" data-id="{{catalog.id}}">
+						<div class="row">
+							<div class="col-md-12">
+								<strong>{{catalog.title}}</strong><br />
+								{{catalog.description}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<a [href]="catalog.url" target="_catalog"><img [src]="catalog.images.thumbnail"></a>
+							</div>
+							<div *ngIf="!tokens.user_token" class="col-md-12 text-center">
+								<a class="btn btn-danger" [href]="catalog.personalize" target="_personalize">Personalize</a>
+							</div>
+							<div *ngIf="tokens.user_token" class="col-md-12 text-center" style="margin-top: 15px;">
+								<a class="btn btn-primary" [href]="catalog.personalize2" target="_personalize">Personalize (Autologin)</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-12" *ngIf="appLoading">
+				Waiting for Application Token...
+			</div>
+		</div>
+	</div>
+</div>
+
